@@ -9,8 +9,8 @@ touch "$DOTFILES/secrets.sh" && source "$DOTFILES/secrets.sh"
 alias c="clear"
 alias ls="ls -G"
 function mkcd () { mkdir -p "$1" && cd "$1"; }
-alias bp="vim ~/.bash_profile && source ~/.bash_profile && echo \"Updated bash profile\""
-function sbp () { grep "$1" ~/.bash_profile; }
+alias bp="vim $DOTFILES/.bashrc && source ~/.bashrc && echo \"Updated bash config\""
+function sbp () { grep "$1" ~/.bashrc; }
 function file-sizes () { ls -lhS ${1:-'.'} | awk '{print $5,$9}'; }
 function kill-name () { kill $(ps aux | grep "$1" | awk '{print $2}'); }
 function ports () { lsof -n -i:${1:-8080} | grep LISTEN; }
@@ -28,7 +28,7 @@ alias dockspace="defaults write com.apple.dock persistent-apps -array-add '{"til
 alias weather="curl wttr.in/denver"
 alias starwars="telnet towel.blinkenlights.nl"
 alias nyan="telnet nyancat.dakko.us"
-alias shruggie="echo \"¯\_(ツ)_/¯\" | pbcopy"
+alias shruggie="echo '¯\_(ツ)_/¯' | pbcopy"
 tableflip () {
   tables=("(ﾉಥ益ಥ）ﾉ﻿ ┻━┻" "(ノಠ益ಠ)ノ彡┻━┻" "(╯°□°）╯︵┻━┻");
   RANDOM=$$$(date +%s)
