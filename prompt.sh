@@ -14,7 +14,7 @@ function parse_git_branch() {
   then
     echo -e -n "\033[$COLOR[${BRANCH}]\033[m"
   else
-    echo -e -n "\033[90m[NO REPO]\033[m"
+    echo ""
   fi
 }
 
@@ -53,4 +53,4 @@ function parse_git_dirty {
   fi
 }
 
-export PS1="\W \`parse_git_branch\` 💩\n$ "
+export PS1="💩 \W \`parse_git_branch\`\n$ "
