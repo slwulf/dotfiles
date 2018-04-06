@@ -18,6 +18,7 @@ function kill-ports () { kill $(ports "$1" | awk '{print $2}'); }
 function nm () { ./node_modules/.bin/${1} "${@:2}"; }
 function serve() { npx static-server; }
 alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
+alias path="echo $PATH | tr -s ':' '\n'"
 
 # osx shit
 alias hfShow='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
