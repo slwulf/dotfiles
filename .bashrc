@@ -19,6 +19,7 @@ function nm () { ./node_modules/.bin/${1} "${@:2}"; }
 function serve() { npx static-server; }
 alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
 alias path="echo $PATH | tr -s ':' '\n'"
+function repos () { cd ~/Repos/"$1"; }
 
 # osx shit
 alias hfShow='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
