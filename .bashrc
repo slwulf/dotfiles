@@ -1,4 +1,9 @@
-source ~/.dotfiles/prompt.sh
+#💩
+
+export DOTFILES=~/.dotfiles
+source "$DOTFILES/prompt.sh"
+touch "$DOTFILES/machine_specific.sh" && source "$DOTFILES/machine_specific.sh"
+touch "$DOTFILES/secrets.sh" && source "$DOTFILES/secrets.sh"
 
 # handy shit
 alias c="clear"
