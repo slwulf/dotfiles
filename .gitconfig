@@ -14,4 +14,4 @@
 [commit]
 	template = /Users/austinwulf/.stCommitMsg
 [alias]
-	fm = git fetch && git merge
+	fm = !git fetch && git merge
