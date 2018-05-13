@@ -9,7 +9,7 @@ touch "$DOTFILES/secrets.sh" && source "$DOTFILES/secrets.sh"
 alias c="clear"
 alias ls="ls -G"
 function mkcd () { mkdir -p "$1" && cd "$1"; }
-alias bp="vim $DOTFILES/.bashrc && source ~/.bashrc && echo \"Updated bash config\""
+alias bp="vim $DOTFILES && source ~/.bashrc && echo \"Updated bash config\""
 function sbp () { grep "$1" ~/.bashrc; }
 function file-sizes () { ls -lhS ${1:-'.'} | awk '{print $5,$9}'; }
 function kill-name () { kill $(ps aux | grep "$1" | awk '{print $2}'); }
