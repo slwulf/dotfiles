@@ -8,6 +8,7 @@ touch "$DOTFILES/secrets.sh" && source "$DOTFILES/secrets.sh"
 # handy shit
 alias c="clear"
 alias ls="ls -G"
+alias dotfiles="cd $DOTFILES"
 function mkcd () { mkdir -p "$1" && cd "$1"; }
 alias bp="vim $DOTFILES && source ~/.bashrc && echo \"Updated bash config\""
 function sbp () { type "$1"; }
