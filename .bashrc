@@ -14,7 +14,7 @@ function sbp () { type "$1"; }
 function file-sizes () { ls -lhS ${1:-'.'} | awk '{print $5,$9}'; }
 function kill-name () { kill $(ps aux | grep "$1" | awk '{print $2}'); }
 function ports () { lsof -n -i:${1:-8080} | grep LISTEN; }
-function kill-ports () { kill $(ports "$1" | awk '{print $2}'); }
+function kill-ports () { kill -9 $(ports "$1" | awk '{print $2}'); }
 function nm () { ./node_modules/.bin/${1} "${@:2}"; }
 function serve() { npx static-server; }
 alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
