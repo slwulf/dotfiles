@@ -53,10 +53,12 @@ function parse_git_dirty {
   fi
 }
 
-$PROMPT_EMOJI=💩
-$TESTTEST=test
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-  $PROMPT_EMOJI="🦄"
-fi
+function prompt () {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "🦄  \W \`parse_git_branch\`\n$ "
+  else
+    echo "💩  \W \`parse_git_branch\`\n$ "
+  fi
+}
 
-export PS1="$TESTTEST  \W \`parse_git_branch\`\n$ "
+export PS1="$(prompt)"
