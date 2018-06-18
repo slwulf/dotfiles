@@ -53,4 +53,12 @@ function parse_git_dirty {
   fi
 }
 
-export PS1="💩  \W \`parse_git_branch\`\n$ "
+function prompt () {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "🦄  \W \`parse_git_branch\`\n$ "
+  else
+    echo "💩  \W \`parse_git_branch\`\n$ "
+  fi
+}
+
+export PS1="$(prompt)"
