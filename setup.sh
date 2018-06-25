@@ -3,7 +3,9 @@ printf "Setting up developer environment...\n\n"
 ln -s ~/.dotfiles/.bashrc ~/.bashrc
 ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
 mkdir ~/Repos
+git config --global core.excludesfiles ~/.gitignore_global
 
 # install nvm
 printf "Installing NVM...\n\n"

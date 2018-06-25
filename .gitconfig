@@ -2,7 +2,7 @@
 	name = Austin Wulf
 	email = atwulf@gmail.com
 [core]
-	excludesfile = /Users/austinwulf/.gitignore_global
+	excludesfiles = ~/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -12,6 +12,6 @@
 [credential]
 	helper = osxkeychain
 [commit]
-	template = /Users/austinwulf/.stCommitMsg
+	template = ~/.stCommitMsg
 [alias]
 	fm = !git fetch && git merge
