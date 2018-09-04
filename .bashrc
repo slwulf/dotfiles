@@ -10,6 +10,7 @@ alias c="clear"
 alias ls="ls -G"
 alias dotfiles="cd $DOTFILES"
 function mkcd () { mkdir -p "$1" && cd "$1"; }
+function mktouch () { mkdir -p "$(dirname "$1")" && touch "$1"; }
 alias bp="vim $DOTFILES && source ~/.bashrc && echo \"Updated bash config\""
 function sbp () { type "$1"; }
 function file-sizes () { ls -lhS ${1:-'.'} | awk '{print $5,$9}'; }
