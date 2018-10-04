@@ -23,6 +23,7 @@ alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | aw
 alias path="echo $PATH | tr -s ':' '\n'"
 function repos () { cd ~/Repos/"$1"; }
 function repo () { repos "$1" && code -r .; }
+function delete-branches () { git branch -D $(git branch | grep -E $1); }
 
 # osx shit
 alias hfShow='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
