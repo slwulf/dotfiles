@@ -35,6 +35,7 @@ alias weather="curl wttr.in/denver"
 alias starwars="telnet towel.blinkenlights.nl"
 alias nyan="telnet nyancat.dakko.us"
 alias shruggie="echo '¯\_(ツ)_/¯' | pbcopy"
+alias shrugmd="echo '¯\\\_(ツ)\_\/¯' | pbcopy"
 tableflip () {
   tables=("(ﾉಥ益ಥ）ﾉ﻿ ┻━┻" "(ノಠ益ಠ)ノ彡┻━┻" "(╯°□°）╯︵┻━┻");
   RANDOM=$$$(date +%s)
