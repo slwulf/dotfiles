@@ -31,9 +31,7 @@ alias hfHide='defaults write com.apple.finder AppleShowAllFiles NO; killall Find
 alias dockspace="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}' && killall Dock"
 
 # fun shit
-alias weather="curl wttr.in/denver"
-alias starwars="telnet towel.blinkenlights.nl"
-alias nyan="telnet nyancat.dakko.us"
+alias weather="curl wttr.in/philadelphia"
 alias shruggie="echo '¯\_(ツ)_/¯' | pbcopy"
 alias shrugmd="echo '¯\\\_(ツ)\_\/¯' | pbcopy"
 tableflip () {
@@ -54,6 +52,7 @@ flip-many-tables () {
     tableflip
   done
 }
+alias partyizer="$DOTFILES/scripts/partyizer.js"
 
 # command line https
 http-get () { curl "$1"; }
