@@ -2,8 +2,8 @@
 
 export DOTFILES=~/.dotfiles
 source "$DOTFILES/prompt.sh"
-touch "$DOTFILES/machine_specific.sh" && source "$DOTFILES/machine_specific.sh"
 touch "$DOTFILES/secrets.sh" && source "$DOTFILES/secrets.sh"
+touch "$DOTFILES/machine_specific.sh" && source "$DOTFILES/machine_specific.sh"
 
 # handy shit
 alias c="clear"
@@ -24,6 +24,23 @@ alias path="echo $PATH | tr -s ':' '\n'"
 function repos () { cd ~/Repos/"$1"; }
 function repo () { repos "$1" && code -r .; }
 function delete-branches () { git branch -D $(git branch | grep -E $1); }
+function rawurlencode () {
+  local string="${1}"
+  local strlen=${#string}
+  local encoded=""
+  local pos c o
+
+  for (( pos=0 ; pos<strlen ; pos++ )); do
+     c=${string:$pos:1}
+     case "$c" in
+        [-_.~a-zA-Z0-9] ) o="${c}" ;;
+        * )               printf -v o '%%%02x' "'$c"
+     esac
+     encoded+="${o}"
+  done
+  echo "${encoded}"    # You can either set a return variable (FASTER)
+  REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
+}
 
 # osx shit
 alias hfShow='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
