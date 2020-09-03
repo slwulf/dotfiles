@@ -9,6 +9,7 @@ touch "$DOTFILES/machine_specific.sh" && source "$DOTFILES/machine_specific.sh"
 alias c="clear"
 alias ls="ls -G"
 alias dotfiles="cd $DOTFILES"
+alias vsc="code -r ."
 function mkcd () { mkdir -p "$1" && cd "$1"; }
 function mktouch () { mkdir -p "$(dirname "$1")" && touch "$1"; }
 alias bp="vim $DOTFILES && source ~/.bashrc && echo \"Updated bash config\""
