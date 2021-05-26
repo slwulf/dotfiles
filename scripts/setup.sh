@@ -8,21 +8,7 @@ git config --global core.excludesfiles ~/.gitignore_global
 
 # install nvm
 printf "Installing NVM...\n\n"
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-
-# install rvm
-printf "Installing RVM...\n\n"
-curl -sSL https://get.rvm.io | bash -s stable
-
-# install brew stuff
-printf "Installing Homebrew...\n\n"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew update
-
-# install postgres
-printf "Installing Postgres...\n\n"
-brew install postgresql
-brew services start postgresql
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 # install monokai terminal theme
 printf "Installing Monokai Terminal theme...\n\n"

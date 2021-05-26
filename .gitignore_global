@@ -1,6 +1,2 @@
 .vscode/
 .DS_Store
-htdocs/sandbox.php
-phplib/Sandbox/
-templates/pages/sandbox.mustache
-
