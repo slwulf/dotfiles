@@ -82,6 +82,9 @@ http-post-json () {
 # typos
 alias rpsec="rspec"
 
+# yes mac i know that you want me to use zsh but i insist
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # environment vars
 export NODE_ENV="development"
 export NVM_DIR="$HOME/.nvm"
