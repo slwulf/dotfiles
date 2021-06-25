@@ -20,11 +20,9 @@ function ports () { lsof -n -i:${1:-8080} | grep LISTEN; }
 function kill-ports () { kill $(ports "$1" | awk '{print $2}'); }
 function nm () { ./node_modules/.bin/${1} "${@:2}"; }
 function serve() { npx static-server; }
-alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
 alias path="echo $PATH | tr -s ':' '\n'"
 function repos () { cd ~/Repos/"$1"; }
 function repo () { repos "$1" && code -r .; }
-function delete-branches () { git branch -D $(git branch | grep -E $1); }
 function rawurlencode () {
   local string="${1}"
   local strlen=${#string}
@@ -42,6 +40,11 @@ function rawurlencode () {
   echo "${encoded}"    # You can either set a return variable (FASTER)
   REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
 }
+
+# git shit
+alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
+function delete-branches () { git branch -D $(git branch | grep -E $1); }
+alias update-fork-master="git fetch origin && git rebase origin/master"
 
 # osx shit
 alias hfShow='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
