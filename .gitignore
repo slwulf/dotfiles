@@ -1,3 +1,4 @@
 node_modules
 machine_specific.sh
 secrets.sh
+path.sh

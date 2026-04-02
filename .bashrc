@@ -1,9 +1,14 @@
-#💩
-
+# 💩
 export DOTFILES=~/.dotfiles
 source "$DOTFILES/prompt.sh"
+
+### add-ons that don't get checked into git
+# secrets.sh -- user-generated secrets
+# machine_specific.sh -- commands/aliases specific to a given terminal
+# path.sh -- machine-generated path/pref updates
 touch "$DOTFILES/secrets.sh" && source "$DOTFILES/secrets.sh"
 touch "$DOTFILES/machine_specific.sh" && source "$DOTFILES/machine_specific.sh"
+touch "$DOTFILES/path.sh" && source "$DOTFILES/path.sh"
 
 # handy shit
 alias c="clear"
@@ -15,88 +20,25 @@ function mktouch () { mkdir -p "$(dirname "$1")" && touch "$1"; }
 alias bp="vim $DOTFILES && source ~/.bashrc && echo \"Updated bash config\""
 function sbp () { type "$1"; }
 function file-sizes () { ls -lhS ${1:-'.'} | awk '{print $5,$9}'; }
-function kill-name () { kill $(ps aux | grep "$1" | awk '{print $2}'); }
 function ports () { lsof -n -i:${1:-8080} | grep LISTEN; }
 function kill-ports () { kill $(ports "$1" | awk '{print $2}'); }
+function kill-name () { kill $(ps aux | grep "$1" | awk '{print $2}'); }
 function nm () { ./node_modules/.bin/${1} "${@:2}"; }
-function serve() { npx static-server; }
 alias path="echo $PATH | tr -s ':' '\n'"
-function repos () { cd ~/Repos/"$1"; }
-function repo () { repos "$1" && code -r .; }
-function rawurlencode () {
-  local string="${1}"
-  local strlen=${#string}
-  local encoded=""
-  local pos c o
-
-  for (( pos=0 ; pos<strlen ; pos++ )); do
-     c=${string:$pos:1}
-     case "$c" in
-        [-_.~a-zA-Z0-9] ) o="${c}" ;;
-        * )               printf -v o '%%%02x' "'$c"
-     esac
-     encoded+="${o}"
-  done
-  echo "${encoded}"    # You can either set a return variable (FASTER)
-  REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
-}
 
 # git shit
 alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
 function delete-branches () { git branch -D $(git branch | grep -E $1); }
 alias update-fork-master="git fetch origin && git rebase origin/master"
+alias update-fork-main="git fetch origin && git rebase origin/main"
 
 # osx shit
-alias hfShow='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hfHide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias show-hidden-files='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hide-hidden-files='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias dockspace="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}' && killall Dock"
-
-# fun shit
-alias weather="curl wttr.in/philadelphia"
-alias shruggie="echo '¯\_(ツ)_/¯' | pbcopy"
-alias shrugmd="echo '¯\\\_(ツ)\_\/¯' | pbcopy"
-tableflip () {
-  tables=("(ﾉಥ益ಥ）ﾉ﻿ ┻━┻" "(ノಠ益ಠ)ノ彡┻━┻" "(╯°□°）╯︵┻━┻");
-  RANDOM=$$$(date +%s)
-  table=${tables[$RANDOM % ${#tables[@]}]};
-  echo $table;
-}
-fliptables () {
-  for run in {1..10}
-  do
-    tableflip
-  done
-}
-flip-many-tables () {
-  while true
-  do
-    tableflip
-  done
-}
-alias partyizer="$DOTFILES/scripts/partyizer.js"
-
-# command line https
-http-get () { curl "$1"; }
-http-post () { curl --data "$1" "$2"; }
-http-post-json () {
-  curl -H "Content-Type: application/json" -X POST -d "$1" "$2";
-}
 
 # typos
 alias rpsec="rspec"
 
-# yes mac i know that you want me to use zsh but i insist
+# we don't use zsh in this house sorry
 export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# environment vars
-export NODE_ENV="development"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="$PATH:$HOME/.rvm/bin"
