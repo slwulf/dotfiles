@@ -28,7 +28,7 @@ alias path="echo $PATH | tr -s ':' '\n'"
 
 # git shit
 alias prune="git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done"
-function delete-branches () { git branch -D $(git branch | grep -E $1); }
+function delete-branches () { git branch -D $(git branch | grep -E --color=never $1); }
 alias update-fork-master="git fetch origin && git rebase origin/master"
 alias update-fork-main="git fetch origin && git rebase origin/main"
 
