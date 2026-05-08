@@ -86,9 +86,9 @@ EOF
       return 1
     fi
     local confirm
-    read -rp "wip: commit to '$current'? [y/N] " confirm
+    read -rp "wip: commit to '$current'? [Y/n] " confirm
     case "$confirm" in
-      y|Y|yes|Yes|YES) ;;
+      ""|y|Y|yes|Yes|YES) ;;
       *) echo "Aborted"; return 1 ;;
     esac
   else
