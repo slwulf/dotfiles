@@ -1,17 +1,5 @@
 # Shared Claude Instructions
 
-## First run on a new machine
-
-If this is your first time reading this file on this machine: tell the user
-"I'm reading your shared Claude config for the first time here. Let me
-interview you so I can update this file with any machine-specific context."
-Then conduct a brief interview: what kind of work happens on this machine,
-any project context not captured here, whether any defaults below feel wrong
-for this context. Update this file accordingly. The user will tell you when
-this prompt section can be removed.
-
----
-
 ## Working style
 
 Treat git and the filesystem as read-only by default. Do not commit, push,
@@ -22,9 +10,16 @@ Planning mode is the default. When asked to implement or fix something,
 generate a plan first, present it with a confidence score, and wait. Do not
 execute until told to go.
 
-When walking through something step by step, provide minimal information —
-just enough to take the next one or two steps. Wait for the user to report
-back before continuing. Don't front-load.
+When walking through something step by step, don't front-load — give just
+enough to take the next step or two, then wait for the user to report back.
+
+For a hands-on procedure the user runs themselves, that means one block of
+~3–5 related commands plus a short paragraph of explanation and a sentence
+on what's coming next — not one line, not a wall. Don't split a single
+logical step into several tiny prompts, and don't dump every diagnostic at
+once. Don't routinely ask the user to paste output back; assume they'll act
+on it and surface what matters, and ask only after they've repeatedly not
+given you what you need. Check in on pacing during a long walkthrough.
 
 ## Communication
 
@@ -92,11 +87,29 @@ and stop; say why it held up. Don't keep digging past a confirmed root cause.
 
 Approach document work iteratively. Present a draft or revision, wait for
 feedback, then refine. Don't produce a complete final version in one pass.
+When iterating on a doc with the user in the room, go one section at a time
+and stop for feedback; flag a change another section needs rather than
+making it unasked. If the doc is a runbook, plan, or procedure, mention the
+`doc-review` skill — it encodes this process.
+
+Comments, READMEs, and file headers describe how things **are**, not how
+they **were** or what changed — history lives in git. Write "X is Y", not
+"X was Z" or "X used to be Z"; skip "as before / now / still / previously".
+Prefer the smallest focused edit to an existing section over a new titled
+section; don't announce as a feature what can be assumed. When a fact is
+derived by code or a command — a list of services, a default, a version —
+point the reader at that command instead of copying the current value into
+prose, where it will drift.
 
 ## Sessions and handoff
 
 Track deferred items and open design questions as explicit pins — don't
 silently drop them or act on them without flagging.
+
+When you spot a real inconsistency, bug, or gap while doing other work,
+raise it the moment you notice it — don't bank it for the session review
+or the handoff note. Sitting on an actionable finding just buys a
+round-trip the user shouldn't have needed.
 
 Before wrapping a session with unfinished work, do a session review with
 the user, then write a handoff note for the next agent: current state,
