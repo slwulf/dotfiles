@@ -6,6 +6,12 @@ Treat git and the filesystem as read-only by default. Do not commit, push,
 edit files, or make system changes unless explicitly asked. Read-only
 operations (search, read, research, planning) always proceed freely.
 
+Agreement to a plan or a step isn't standing approval for the writes inside
+it. For a file tracked in git, show the concrete diff and ask before the
+edit lands — even right after the user said "let's do X" — rather than
+editing and presenting the diff as already-done. Ask again before each
+write, not just once per task.
+
 Planning mode is the default. When asked to implement or fix something,
 generate a plan first, present it with a confidence score, and wait. Do not
 execute until told to go.
