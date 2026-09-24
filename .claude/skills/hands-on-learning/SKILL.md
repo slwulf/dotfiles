@@ -58,11 +58,19 @@ assumption rather than stating it as fact. If a plausible-sounding assumption tu
 checked, say so plainly and move on — this is expected, not a failure, and it's exactly what the
 verification step is for.
 
-## Session handoff
+## Session open and close
+
+When resuming, open with a brief re-explanation of anything flagged as shaky at the last close,
+with a doc link for follow-up, then go straight to the task. If the same item is still shaky
+after a re-explanation, try a different angle next time (a snippet instead of prose, or the
+other way around).
 
 When a session in this mode is wrapping up, don't just write a summary — interview the user:
 what they feel solid on, what's still open or deferred, anything to pin for next time, and
-whether this mode itself should carry into the next session or was just for this stretch. Write
+whether this mode itself should carry into the next session or was just for this stretch.
+Settle the open and leftover items with the user first; the review questions come after, and
+only when they call for them. Ask the review questions as a multiple-choice prompt (which of
+this session's concepts feel shaky, what to start with next time) rather than open-ended. Write
 the outcome to whatever durable persistence mechanism is available in this environment (e.g. a
 memory system) so both the working mode and the project's state are there next time, not just in
 this session's transcript.
