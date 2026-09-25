@@ -36,6 +36,14 @@ ln -s ~/.dotfiles/.bashrc ~/.bashrc
 ln -s ~/.dotfiles/.bash_profile ~/.bash_profile
 ln -s ~/.dotfiles/.profile ~/.profile
 
+if [ -e ~/.config/tmux ] && [ ! -L ~/.config/tmux ]; then
+  mv ~/.config/tmux ~/.config/tmux.bak
+  echo "Backed up existing ~/.config/tmux to ~/.config/tmux.bak"
+fi;
+
+mkdir -p ~/.config
+ln -sfn ~/.dotfiles/.config/tmux ~/.config/tmux
+
 source ~/.bash_profile
 
 printf "Done."
