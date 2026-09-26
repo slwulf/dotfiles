@@ -1,0 +1,4 @@
+layout splits
+launch --cwd=$HOME
+launch --location=vsplit --cwd=$HOME
+launch --location=hsplit btop
