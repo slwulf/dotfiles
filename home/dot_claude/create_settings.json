@@ -3,5 +3,6 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "theme": "dark-ansi"
+  "theme": "dark-ansi",
+  "preferredNotifChannel": "notifications_disabled"
 }
