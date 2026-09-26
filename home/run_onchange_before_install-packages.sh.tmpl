@@ -5,8 +5,8 @@ if command -v brew &>/dev/null; then
   brew bundle --file=/dev/stdin <<'EOF'
 {{ range .packages.brews }}brew {{ . | quote }}
 {{ end -}}
-{{ if eq .chezmoi.os "darwin" }}{{ range .packages.casks }}cask {{ . | quote }}
-{{ end }}{{ end -}}
+{{ range .packages.casks }}cask {{ . | quote }}
+{{ end -}}
 EOF
 elif [ "{{ .chezmoi.os }}" = "linux" ]; then
   sudo apt-get update
