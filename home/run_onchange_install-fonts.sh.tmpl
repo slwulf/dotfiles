@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eufo pipefail
+
+FONT_DIR="$HOME/.local/share/fonts"
+if [ ! -f "$FONT_DIR/LilexNerdFont-Regular.ttf" ]; then
+  mkdir -p "$FONT_DIR"
+  curl -fLo /tmp/Lilex.tar.xz https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Lilex.tar.xz
+  tar -xf /tmp/Lilex.tar.xz -C "$FONT_DIR"
+  rm /tmp/Lilex.tar.xz
+  fc-cache -f "$FONT_DIR"
+fi
