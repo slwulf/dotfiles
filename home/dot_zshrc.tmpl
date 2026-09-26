@@ -1,0 +1,5 @@
+for f in "$HOME/.zsh"/*.zsh; do
+  source "$f"
+done
+
+[[ -f "$HOME/.zsh_local" ]] && source "$HOME/.zsh_local"

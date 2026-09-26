@@ -1,0 +1,4 @@
+packages:
+  brews: [git, tmux, neovim, zsh]
+  casks: []
+  apts: [git, tmux, neovim, zsh]

@@ -1,0 +1,25 @@
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' formats '%b'
+zstyle ':vcs_info:git:*' actionformats '%b|%a'
+
+_prompt_git_dirty() {
+  git status --porcelain 2>/dev/null | grep -q .
+}
+
+_prompt_render() {
+  vcs_info
+  local branch=$vcs_info_msg_0_
+  local color="green"
+  [[ -n $branch ]] && _prompt_git_dirty && color="red"
+
+  local face="💩"
+  [[ -n $SSH_CLIENT || -n $SSH_TTY ]] && face="🦄"
+
+  local branch_part=""
+  [[ -n $branch ]] && branch_part="%F{$color}[$branch]%f"
+
+  PROMPT="$face %1~ ${branch_part}
+$ "
+}
+
+precmd_functions+=(_prompt_render)
