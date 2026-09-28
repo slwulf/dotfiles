@@ -1,11 +1,17 @@
 #!/bin/bash
 set -eufo pipefail
 
+{{ if eq .chezmoi.os "darwin" -}}
+FONT_DIR="$HOME/Library/Fonts"
+{{ else -}}
 FONT_DIR="$HOME/.local/share/fonts"
+{{ end -}}
 if [ ! -f "$FONT_DIR/LilexNerdFont-Regular.ttf" ]; then
   mkdir -p "$FONT_DIR"
   curl -fLo /tmp/Lilex.tar.xz https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Lilex.tar.xz
   tar -xf /tmp/Lilex.tar.xz -C "$FONT_DIR"
   rm /tmp/Lilex.tar.xz
+{{ if ne .chezmoi.os "darwin" -}}
   fc-cache -f "$FONT_DIR"
+{{ end -}}
 fi
