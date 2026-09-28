@@ -1,2 +1,6 @@
+{{- $machineClass := promptStringOnce . "machineClass" "Machine class (work/personal)" -}}
+{{ if eq $machineClass "work" }}
+scriptTempDir = "{{ .chezmoi.homeDir }}/.local/state/chezmoi-scripts"
+{{ end -}}
 [data]
-    machineClass = {{ promptStringOnce . "machineClass" "Machine class (work/personal)" | quote }}
+    machineClass = {{ $machineClass | quote }}
