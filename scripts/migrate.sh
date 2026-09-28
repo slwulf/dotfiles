@@ -3,7 +3,7 @@ set -euo pipefail
 
 DOTFILES="$HOME/.dotfiles"
 
-# 1. Install chezmoi if missing
+# Install chezmoi if missing
 if ! command -v chezmoi &>/dev/null; then
   echo "Installing chezmoi..."
   if command -v brew &>/dev/null; then
@@ -13,7 +13,7 @@ if ! command -v chezmoi &>/dev/null; then
   fi
 fi
 
-# 2. Fold any pre-existing legacy bash-era files into ~/.zsh_local
+# Fold any pre-existing legacy bash-era files into ~/.zsh_local
 legacy_files=("$DOTFILES/secrets.sh" "$DOTFILES/machine_specific.sh" "$DOTFILES/path.sh")
 found_legacy=false
 for f in "${legacy_files[@]}"; do
@@ -32,16 +32,33 @@ for f in "${legacy_files[@]}"; do
   rm -f "$f"
 done
 
-# 3. Point chezmoi's default source dir at the real repo
+# Remove legacy setup.sh/claude-setup.sh symlinks, if present
+legacy_symlinks=(
+  "$HOME/.bashrc"
+  "$HOME/.bash_profile"
+  "$HOME/.profile"
+  "$HOME/.config/tmux"
+  "$HOME/.claude/CLAUDE.md"
+  "$HOME/.claude/statusline-command.sh"
+  "$HOME/.claude/skills/doc-review"
+)
+for link in "${legacy_symlinks[@]}"; do
+  if [ -L "$link" ] && [ ! -e "$link" ]; then
+    rm -f "$link"
+    echo "Removed dangling legacy symlink: $link"
+  fi
+done
+
+# Point chezmoi's default source dir at the real repo
 if [ ! -e "$HOME/.local/share/chezmoi" ]; then
   mkdir -p "$HOME/.local/share"
   ln -s "$DOTFILES" "$HOME/.local/share/chezmoi"
 fi
 
-# 4. Apply
+# Apply
 chezmoi init --apply
 
-# 5. Offer the shell switch — never do this without confirmation
+# Offer the shell switch — never do this without confirmation
 read -r -p "Switch default shell to zsh now? [y/N] " confirm
 if [[ "$confirm" =~ ^[Yy]$ ]]; then
   chsh -s "$(command -v zsh)"
