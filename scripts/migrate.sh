@@ -8,10 +8,8 @@ if ! command -v chezmoi &>/dev/null; then
   echo "Installing chezmoi..."
   if command -v brew &>/dev/null; then
     brew install chezmoi
-  elif command -v apt-get &>/dev/null; then
-    sudo apt-get update && sudo apt-get install -y chezmoi
   else
-    sh -c "$(curl -fsLS https://get.chezmoi.io)"
+    sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin"
   fi
 fi
 
