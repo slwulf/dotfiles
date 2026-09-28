@@ -1,6 +1,7 @@
 # dotfiles
 alias dotfiles="cd $DOTFILES"
 alias bp="${EDITOR:-nvim} $DOTFILES && chezmoi apply && echo \"Updated dotfiles\""
+alias zshlocal="nvim ~/.zsh_local"
 function sbp () { type "$1"; }
 
 # shell
