@@ -17,5 +17,9 @@ return {
         return icon .. " " .. os.date("%I:%M%p")
       end,
     }
+
+    local winbar = { lualine_c = { { "filename", path = 1 } } }
+    opts.winbar = winbar
+    opts.inactive_winbar = winbar
   end,
 }

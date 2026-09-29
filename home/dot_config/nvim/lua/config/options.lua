@@ -6,3 +6,5 @@ vim.g.mapleader = ","
 vim.opt.relativenumber = false
 vim.opt.wrap = true
 vim.opt.linebreak = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
