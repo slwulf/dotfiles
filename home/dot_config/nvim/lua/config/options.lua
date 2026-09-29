@@ -3,3 +3,6 @@
 -- Add any additional options here
 
 vim.g.mapleader = ","
+vim.opt.relativenumber = false
+vim.opt.wrap = true
+vim.opt.linebreak = true
