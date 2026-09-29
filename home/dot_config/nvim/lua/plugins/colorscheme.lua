@@ -1,3 +1,5 @@
+local palette = require("config.palette")
+
 return {
   {
     "loctvl842/monokai-pro.nvim",
@@ -6,16 +8,19 @@ return {
     opts = {
       override_palette = function()
         return {
-          background = "#1a1420", -- kitty's terminal background
-          dark1 = "#1a1420", -- same tier, kitty has no third shade
-          dark2 = "#120e16", -- kitty's inactive_tab_background
-          text = "#eaf2f1", -- kitty foreground
-          dimmed1 = "#e3e3dd", -- kitty color7
-          dimmed2 = "#a291a5", -- kitty active_border_color
-          dimmed3 = "#696d77", -- kitty inactive_tab_foreground
-          dimmed4 = "#474747", -- kitty color0
-          dimmed5 = "#3c3341", -- kitty inactive_border_color
+          background = palette.background,
+          dark1 = palette.background,
+          dark2 = palette.background_dark,
+          text = palette.foreground,
+          dimmed1 = palette.light,
+          dimmed2 = palette.mauve,
+          dimmed3 = palette.gray,
+          dimmed4 = palette.dark_gray,
+          dimmed5 = palette.border_dim,
         }
+      end,
+      override_scheme = function()
+        return { tab = { activeForeground = palette.purple, activeBorder = palette.purple } }
       end,
       override = function(scheme)
         local blend = require("monokai-pro.colors").blend
