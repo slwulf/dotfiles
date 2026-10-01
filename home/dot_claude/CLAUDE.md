@@ -5,31 +5,6 @@
 
 # Shared Claude Instructions
 
-> **Migration (temporary).** Per project, once per machine. Skip a project
-> whose memory already matches "Sessions and handoff": pointer files, no
-> detail in memory, `Active:`/`Paused:` hook lines. Otherwise, before other
-> work in that project:
-> 1. Inventory its memory dir and any handoff-like files in
->    `~/.claude/plans/` (read-only): run the `memory-report` skill, which
->    lists memory files, handoffs, and plans, and checks the index and
->    links. Classify each as in-flight, finished, or durable fact, and
->    check each finished or closed claim against live state (git log,
->    files, the running system) before it is deleted. Also check index
->    hooks against file contents and handoff files for sections that
->    read as current.
-> 2. Ask the user about anything ambiguous, multiple-choice.
-> 3. In-flight: move (not copy) the detail into
->    `~/.claude/handoffs/<identifier>-handoff.md` with a `Resume` block,
->    and replace sections that read as current. Memory keeps the next
->    action and unverified claims in `project_task_<identifier>.md`.
-> 4. Finished: follow "Finishing" in the `session-handoff` skill.
-> 5. Retire memory this file now covers (e.g. a "prep session handoff"
->    feedback note), per "Retiring memory" in the skill. Rewrite
->    `MEMORY.md` hooks, active first, then run `memory-report` again.
->
-> Diff and ask before each write, listing deletes and moves by path. The
-> user removes this block.
-
 ## Working style
 
 Treat git and the filesystem as read-only by default. Do not commit, push,
