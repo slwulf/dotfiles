@@ -4,5 +4,32 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "theme": "dark-ansi",
-  "preferredNotifChannel": "notifications_disabled"
+  "preferredNotifChannel": "notifications_disabled",
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(git status *)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(git branch *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(which *)",
+      "Bash(env *)",
+      "Bash(pwd *)",
+      "Bash(tree *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(file *)",
+      "Bash(stat *)",
+      "Bash(ps *)",
+      "Bash(echo *)"
+    ]
+  }
 }

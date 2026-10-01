@@ -1,3 +1,8 @@
+<!-- Managed by chezmoi from ~/.dotfiles
+     Source: home/dot_claude/CLAUDE.md
+     Skills and settings in this directory are version-controlled.
+     Make changes in the dotfiles repo, then run: chezmoi apply -->
+
 # Shared Claude Instructions
 
 > **Migration (temporary).** Per project, once per machine. Skip a project
