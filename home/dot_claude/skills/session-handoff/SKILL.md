@@ -53,6 +53,13 @@ each. The active task's line is first and starts `Active:`; the rest start
    confidence. Replace sections that describe current state, next steps,
    or open pins instead of adding a session section beside them; date
    history sections. Create the file if none exists.
+   
+   **Handoff vs plan separation:** Link the plan with `Plan: <path>`. Record
+   high-level decisions (what was chosen and why) in a Decisions section—3–5
+   sentences, not code blocks or file lists. Implementation patterns, file
+   paths, code snippets, and detailed steps stay in the plan. The handoff
+   states "use X pattern" or "chose Y approach over Z"; the plan shows how.
+
 3. **Memory file.** Overwrite the task's memory file: next action,
    unverified claims, handoff path. No detail copied from the handoff
    file. It is a `project` memory.
@@ -108,6 +115,12 @@ Two cases retire a memory file:
   area-level one. The destination must load everywhere the memory
   applied. If it covers less, keep the memory.
 
+**Partial obsolescence:** If a memory contains both obsolete content (covered
+by instructions/skills) and useful content not covered elsewhere, rewrite it
+first. Extract the useful part into a new focused memory, then retire the
+original. Don't retire memories with mixed useful/obsolete content without
+extracting the useful part first.
+
 Delete the file and its `MEMORY.md` line, then search the memory dir for
 the file's name and its `name:` slug. Replace each `[[link]]` hit with
 the handoff path, the instruction file, or plain words, so nothing
@@ -123,3 +136,20 @@ Next: <the next step>
 Pins:
 - <open pin>
 ```
+
+**Example Resume block:**
+
+```markdown
+## Resume
+State: API migration for service authentication - plan done, no code yet,
+awaiting security review of token format. Branch main is clean.
+Next: Implement per plan - add auth middleware to 3 endpoints, update
+client SDK.
+Pins:
+- Awaiting security team review of JWT claims
+- Open: defer integration tests until staging env ready or mock now?
+```
+
+The Resume block is a snapshot for quick restart. Background, detailed
+decisions, verification steps, and resolved questions live in sections
+below it, not in the Resume block itself.
