@@ -68,3 +68,45 @@ EOF
 
   git add -A && git commit -m "WIP"
 }
+
+# kssh -- launch a kitty session ssh'd into $KSSH_HOST, close the window it was launched from
+function kssh () {
+  if [[ -n $SSH_CLIENT || -n $SSH_TTY ]]; then
+    echo "kssh: already in an ssh session — run this from the local machine" >&2
+    return 1
+  fi
+
+  if [ -z "$KSSH_HOST" ]; then
+    echo "kssh: \$KSSH_HOST not set — add 'env KSSH_HOST=<alias>' to ~/.config/kitty/kitty-local.conf" >&2
+    return 1
+  fi
+
+  if ! kitty @ ls >/dev/null 2>&1; then
+    echo "kssh: kitty remote control unavailable — check allow_remote_control/listen_on in ~/.config/kitty/kitty-local.conf" >&2
+    return 1
+  fi
+
+  local resolved
+  resolved=$(ssh -G "$KSSH_HOST" 2>/dev/null | awk '/^hostname /{print $2; exit}')
+  if [ -z "$resolved" ] || [ "$resolved" = "$KSSH_HOST" ]; then
+    echo "kssh: no usable 'Host $KSSH_HOST' entry in ~/.ssh/config" >&2
+    return 1
+  fi
+
+  local template="$HOME/.config/kitty/sessions/ssh.session"
+  if [ ! -f "$template" ]; then
+    echo "kssh: missing session template at $template" >&2
+    return 1
+  fi
+
+  local tmp
+  tmp=$(mktemp "${TMPDIR:-/tmp}/kssh-session.XXXXXX") || return 1
+  sed "s/__KSSH_HOST__/$KSSH_HOST/g" "$template" > "$tmp"
+
+  nohup kitty --session "$tmp" >/dev/null 2>&1 &
+  disown
+  ( sleep 5; rm -f "$tmp" ) &
+  disown
+
+  kitty @ close-window --match state:focused_os_window
+}
