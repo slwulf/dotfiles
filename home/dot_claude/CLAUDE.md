@@ -7,9 +7,11 @@
 > 1. Inventory its memory dir and any handoff-like files in
 >    `~/.claude/plans/` (read-only): run the `memory-report` skill, which
 >    lists memory files, handoffs, and plans, and checks the index and
->    links. Classify each as in-flight, finished, or durable fact. Also
->    check index hooks against file contents and handoff files for
->    sections that read as current.
+>    links. Classify each as in-flight, finished, or durable fact, and
+>    check each finished or closed claim against live state (git log,
+>    files, the running system) before it is deleted. Also check index
+>    hooks against file contents and handoff files for sections that
+>    read as current.
 > 2. Ask the user about anything ambiguous, multiple-choice.
 > 3. In-flight: move (not copy) the detail into
 >    `~/.claude/handoffs/<identifier>-handoff.md` with a `Resume` block,

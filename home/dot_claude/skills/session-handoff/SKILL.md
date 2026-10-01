@@ -84,12 +84,15 @@ that session or the next. Until then its hook line reads
 1. Write one paragraph of anything worth keeping long-term (the outcome
    and durable gotchas, not dropped decisions), drawn from the handoff
    file and its linked plan. Add it at the top of the handoff file as
-   `## Digest` and remove the `Resume` block.
+   `## Digest` and remove the `Resume` block. Plan-mode files in
+   `~/.claude/plans/` that belong to the task but no handoff links are
+   named to the user: each is linked from the Digest or left to be swept.
 2. Make the rest of the file read as record. Remove sections that read as
    current (next steps, open pins, "state right now", working-style
    reminders), or date them. Each unfinished pin moves to a successor
-   task's handoff file or is dropped. A linked plan-mode file may be
-   swept; say so beside the link.
+   task's handoff file or is dropped, and a pin is dropped only after
+   its closure is checked against live state or confirmed by the user.
+   A linked plan-mode file may be swept; say so beside the link.
 3. Retire the task's memory file (below). The handoff file stays in
    `~/.claude/handoffs/`, Digest on top.
 4. If no task is active, say so; if others are paused, ask which to resume.
