@@ -1,5 +1,28 @@
 # Shared Claude Instructions
 
+> **Migration (temporary).** Per project, once per machine. Skip a project
+> whose memory already matches "Sessions and handoff": pointer files, no
+> detail in memory, `Active:`/`Paused:` hook lines. Otherwise, before other
+> work in that project:
+> 1. Inventory its memory dir and any handoff-like files in
+>    `~/.claude/plans/` (read-only): run the `memory-report` skill, which
+>    lists memory files, handoffs, and plans, and checks the index and
+>    links. Classify each as in-flight, finished, or durable fact. Also
+>    check index hooks against file contents and handoff files for
+>    sections that read as current.
+> 2. Ask the user about anything ambiguous, multiple-choice.
+> 3. In-flight: move (not copy) the detail into
+>    `~/.claude/handoffs/<identifier>-handoff.md` with a `Resume` block,
+>    and replace sections that read as current. Memory keeps the next
+>    action and unverified claims in `project_task_<identifier>.md`.
+> 4. Finished: follow "Finishing" in the `session-handoff` skill.
+> 5. Retire memory this file now covers (e.g. a "prep session handoff"
+>    feedback note), per "Retiring memory" in the skill. Rewrite
+>    `MEMORY.md` hooks, active first, then run `memory-report` again.
+>
+> Diff and ask before each write, listing deletes and moves by path. The
+> user removes this block.
+
 ## Working style
 
 Treat git and the filesystem as read-only by default. Do not commit, push,
@@ -120,3 +143,28 @@ round-trip the user shouldn't have needed.
 Before wrapping a session with unfinished work, do a session review with
 the user, then write a handoff note for the next agent: current state,
 decisions already made (don't re-litigate), open pins.
+
+Two stores, strictly separated. The handoff file
+(`~/.claude/handoffs/<identifier>-handoff.md`) holds detail: per-step status
+and results, decisions, findings, open pins, sources, confidence. It opens
+with a `Resume` block (15 lines max: state, next step, open pins).
+`<identifier>` is the current work's ticket, short title, or branch,
+slugged. Project memory holds state that can't be derived from the repo or
+the handoff file, plus pointers; it never copies their detail. One
+pointer per in-flight task, the active one first: its memory file carries
+the next action and unverified claims; its `MEMORY.md` hook line carries
+identifier, status, and handoff path. Finished work is cleaned up: a
+one-paragraph digest of anything worth keeping goes at the top of the
+handoff file, and the pointer is removed. Small durable facts (feedback,
+preferences) may live in memory directly; when one is promoted into an
+instruction file that covers everywhere it applied, retire the memory
+(see `session-handoff`).
+
+"Where did we leave off", "pick up where we left off", or "get started
+with X" runs the start routine in the `session-handoff` skill: read the
+pointer, read only the `Resume` block, verify against live state, report
+tersely. With no pointer, ask what the work is. "Prep session handoff" or
+similar runs the wrap-up routine: review interactively, then write the
+handoff file, the memory file, and the hook line, in that order, getting
+approval for each write first (a plain-text diff in chat when the edit
+tool won't prompt).
