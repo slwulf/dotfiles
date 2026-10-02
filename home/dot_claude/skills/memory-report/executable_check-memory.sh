@@ -27,4 +27,30 @@ grep -on '\[\[[^]]*\]\]' "$dir"/*.md | while IFS=: read -r p n l; do
   grep -qxF -- "$t" <<<"$names" || echo "dangling link: ${p##*/}:$n $l"
 done | grep . && bad=1
 
+# session-handoff invariants
+active=$(grep -c 'Active:' "$index" || echo 0)
+[ "$active" -le 1 ] || report "multiple Active tasks ($active) in index"
+
+# hook lines for pointer files should be discovery-only
+while IFS= read -r line; do
+  if printf '%s' "$line" | grep -qE '\(project_task_[^)]+\.md\)'; then
+    if printf '%s' "$line" | grep -qE '(—\s+|;\s*)(next|plan|handoff):'; then
+      f=$(printf '%s' "$line" | grep -oE 'project_task_[^)]+\.md')
+      report "hook line for $f: contains old-format inline fields"
+    fi
+  fi
+done < "$index"
+
+for p in "$dir"/project_task_*.md; do
+  [ -f "$p" ] || continue
+  f=${p##*/}
+  hf=$(grep '^Handoff:' "$p" | head -1 | sed 's/^Handoff:[[:space:]]*//')
+  if [ -z "$hf" ]; then
+    report "pointer $f: missing Handoff: field"
+  else
+    [ -f "${hf/#\~/$HOME}" ] || report "pointer $f: handoff not found: $hf"
+  fi
+  grep -q '^Plan:' "$p" && report "pointer $f: contains Plan: field (belongs in handoff)"
+done
+
 exit $bad

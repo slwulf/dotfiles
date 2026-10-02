@@ -28,5 +28,12 @@ alter the index text:
    does not count.
 4. **Check.** A heading with ✅ clean, or the findings from
    `check-memory.sh`.
+5. **Separation of concerns.** Read each `project_task_*.md` pointer file
+   and its hook line in the index. Flag: a hook line containing more than
+   `<Active|Paused>: <one-liner>` (e.g. a `next:`, `plan:`, or `handoff:`
+   field, whether separated by `;` or `—`); a pointer file containing
+   content beyond the template fields (State, Next, Pins, Unverified,
+   Handoff) — including old-format prose such as `**Why:**`/`**How to
+   apply:**` blocks or inline summaries that belong in the handoff.
 
 The skill is read-only. Offer fixes for any findings and wait.
