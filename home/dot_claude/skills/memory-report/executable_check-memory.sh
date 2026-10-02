@@ -28,7 +28,7 @@ grep -on '\[\[[^]]*\]\]' "$dir"/*.md | while IFS=: read -r p n l; do
 done | grep . && bad=1
 
 # session-handoff invariants
-active=$(grep -c 'Active:' "$index" || echo 0)
+active=$(grep -c 'Active:' "$index" || true)
 [ "$active" -le 1 ] || report "multiple Active tasks ($active) in index"
 
 # hook lines for pointer files should be discovery-only
