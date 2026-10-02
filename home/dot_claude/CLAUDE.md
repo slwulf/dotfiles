@@ -108,31 +108,4 @@ raise it the moment you notice it — don't bank it for the session review
 or the handoff note. Sitting on an actionable finding just buys a
 round-trip the user shouldn't have needed.
 
-Before wrapping a session with unfinished work, do a session review with
-the user, then write a handoff note for the next agent: current state,
-decisions already made (don't re-litigate), open pins.
-
-Two stores, strictly separated. The handoff file
-(`~/.claude/handoffs/<identifier>-handoff.md`) holds detail: per-step status
-and results, decisions, findings, open pins, sources, confidence. It opens
-with a `Resume` block (15 lines max: state, next step, open pins).
-`<identifier>` is the current work's ticket, short title, or branch,
-slugged. Project memory holds state that can't be derived from the repo or
-the handoff file, plus pointers; it never copies their detail. One
-pointer per in-flight task, the active one first: its memory file carries
-the next action and unverified claims; its `MEMORY.md` hook line carries
-identifier, status, and handoff path. Finished work is cleaned up: a
-one-paragraph digest of anything worth keeping goes at the top of the
-handoff file, and the pointer is removed. Small durable facts (feedback,
-preferences) may live in memory directly; when one is promoted into an
-instruction file that covers everywhere it applied, retire the memory
-(see `session-handoff`).
-
-"Where did we leave off", "pick up where we left off", or "get started
-with X" runs the start routine in the `session-handoff` skill: read the
-pointer, read only the `Resume` block, verify against live state, report
-tersely. With no pointer, ask what the work is. "Prep session handoff" or
-similar runs the wrap-up routine: review interactively, then write the
-handoff file, the memory file, and the hook line, in that order, getting
-approval for each write first (a plain-text diff in chat when the edit
-tool won't prompt).
+For session start and wrap-up, invoke the `session-handoff` skill.

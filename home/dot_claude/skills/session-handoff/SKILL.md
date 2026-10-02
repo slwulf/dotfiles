@@ -1,14 +1,16 @@
 ---
 name: session-handoff
-description: Start and wrap-up routines for multi-session work. Start: "where did we leave off", "pick up where we left off", "get started with <thing>". Wrap-up: "prep session handoff" or similar. Use at the open and close of any session that continues or leaves unfinished work.
+description: Start and wrap-up routines for multi-session work. Start: "where did we leave off", "pick up where we left off", "get started with <thing>". Wrap-up: "prep session handoff" or similar.
 ---
 
 # Session handoff
 
-Two stores. Each handoff file (`~/.claude/handoffs/<identifier>-handoff.md`)
-holds one task's detail. Project memory holds one pointer per in-flight
-task, plus state that can't be derived from the repo or the handoff file.
-`CLAUDE.md` has the separation rule; this skill has the routines. Handoff
+Two stores, strictly separated. Each handoff file
+(`~/.claude/handoffs/<identifier>-handoff.md`) holds one task's detail:
+step status and results, decisions, findings, open pins, sources,
+confidence. Project memory holds one pointer per in-flight task plus state
+that can't be derived from the repo or the handoff file; it never copies
+detail from the handoff file. Handoff
 files stay out of `~/.claude/plans/`, which Claude Code sweeps by age. A
 handoff file links its plan-mode file (`Plan:` line) and records the
 decisions that plan produced.
