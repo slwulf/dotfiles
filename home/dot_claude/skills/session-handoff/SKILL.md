@@ -1,8 +1,10 @@
 ---
 name: session-handoff
-description: Start and wrap-up routines for multi-session work. Start: "where
-  did we leave off", "pick up where we left off", "get started with <thing>".
-  Wrap-up: "prep session handoff" or similar.
+description: >-
+  Start and wrap-up routines for multi-session work. Start: "where did we
+  leave off", "what's next", "pick up where we left off", "get started with
+  <thing>", or any resume question at the start of a session. Wrap-up: "prep
+  session handoff" or similar.
 ---
 
 # Session handoff
