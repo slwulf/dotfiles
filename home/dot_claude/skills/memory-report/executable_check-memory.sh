@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Check a project's memory dir: index entries resolve to files, every memory
-# file is indexed, and [[links]] resolve to a `name:` slug.
+# file is indexed, [[links]] resolve to a `name:` slug, the active task is
+# first, and plans linked from handoffs exist.
 # Prints each problem; exits 1 if any. Read-only.
 # Usage: check-memory.sh [memory-dir]   (default: this directory's project memory)
 set -u
@@ -28,8 +29,12 @@ grep -on '\[\[[^]]*\]\]' "$dir"/*.md | while IFS=: read -r p n l; do
 done | grep . && bad=1
 
 # session-handoff invariants
-active=$(grep -c 'Active:' "$index" || true)
+active=$(grep -cE '\(project_task_[^)]+\.md\) — Active:' "$index" || true)
 [ "$active" -le 1 ] || report "multiple Active tasks ($active) in index"
+if [ "$active" = 1 ]; then
+  first=$(grep -m1 -E '\(project_task_[^)]+\.md\) — ' "$index")
+  case $first in *' — Active:'*) ;; *) report "Active task is not the first task line in index" ;; esac
+fi
 
 # hook lines for pointer files should be discovery-only
 while IFS= read -r line; do
@@ -48,7 +53,13 @@ for p in "$dir"/project_task_*.md; do
   if [ -z "$hf" ]; then
     report "pointer $f: missing Handoff: field"
   else
-    [ -f "${hf/#\~/$HOME}" ] || report "pointer $f: handoff not found: $hf"
+    hp=${hf/#\~/$HOME}
+    if [ -f "$hp" ]; then
+      pf=$(sed -n 's/^Plan:[[:space:]]*//p' "$hp" | head -1 | grep -oE '^(~|/)[^ )]+')
+      [ -z "$pf" ] || [ -f "${pf/#\~/$HOME}" ] || report "handoff $hf: plan not found: $pf"
+    else
+      report "pointer $f: handoff not found: $hf"
+    fi
   fi
   grep -q '^Plan:' "$p" && report "pointer $f: contains Plan: field (belongs in handoff)"
 done

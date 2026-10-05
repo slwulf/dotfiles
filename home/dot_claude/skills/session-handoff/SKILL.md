@@ -12,15 +12,17 @@ description: >-
 Three stores, each with a distinct role:
 
 - **`MEMORY.md` hook line** — discovery only. Always in context; one line per
-  task. Format: `- [<identifier>](project_task_<identifier>.md) — <Active|Paused>: <one-liner>`
+  task, as terse as possible: the task's high-level name, just enough to
+  recognise it by reference. Format: `- [<identifier>](project_task_<identifier>.md) — <Active|Paused>: <one-liner>`
 - **Pointer file** (`project_task_<identifier>.md`) — restart context. Owns
-  state, next step, open pins, unverified claims, and path to the handoff file.
+  state, next step, open pins, unverified claims, shaky concepts, and path to
+  the handoff file.
   Read at session start; retired when the task finishes.
 - **Handoff file** (`~/.claude/handoffs/<identifier>-handoff.md`) — detail
-  record. Decisions + rationale, step results, findings, sources, confidence,
-  plan link. Open it when work needs depth. Lives outside `~/.claude/plans/`,
-  which Claude Code sweeps by age. Becomes a permanent record when the task
-  closes; the Digest (see Finishing) is its entry point after the pointer retires.
+  record. Decisions + rationale, step results, findings, sources, plan link.
+  Open it when work needs depth. Lives outside `~/.claude/plans/`, which
+  Claude Code sweeps by age. Becomes a permanent record when the task closes;
+  the Digest (see Finishing) is its entry point after the pointer retires.
 
 `<identifier>` is the task's ticket, short title, or branch, slugged
 (`feat/x` → `feat-x`). Several tasks can be in flight; one is active. The
@@ -30,7 +32,7 @@ active hook line is first and starts `Active:`; the rest start `Paused:`.
 
     ---
     name: project_task_<identifier>
-    description: <one-liner task description>
+    description: <detail that expands the hook line>
     metadata:
       type: project
     ---
@@ -41,11 +43,16 @@ active hook line is first and starts `Active:`; the rest start `Paused:`.
     - <open pin>
     Unverified:
     - <claim that couldn't be checked against live state>
+    Shaky:
+    - <concept that still feels shaky>
     Handoff: ~/.claude/handoffs/<identifier>-handoff.md
 
 `name`, `description`, and body are filled per task; `type: project` is fixed —
 it's how the memory system categorizes pointer files. Omit `Unverified:` if
-everything was checked.
+everything was checked, and `Shaky:` if no concept is shaky.
+
+A listed pin is open. Closing a pin removes it from the list; anything worth
+keeping about it goes in the handoff (Decisions or Findings).
 
 **Example:**
 
@@ -64,6 +71,8 @@ everything was checked.
     - Open: defer integration tests until staging env ready, or mock now?
     Unverified:
     - Staging env said to be ready "next week" — not checked this session
+    Shaky:
+    - Token refresh flow — re-explain at start
     Handoff: ~/.claude/handoffs/auth-middleware-rewrite-handoff.md
 
 **Handoff file template:**
@@ -82,8 +91,7 @@ everything was checked.
     ## Sources
     <docs, tickets, links consulted>
 
-    ## Confidence
-    <overall or per-decision assessment>
+Omit `Plan:` if there is no plan.
 
 ---
 
@@ -100,24 +108,27 @@ everything was checked.
    and git status for a branch, files for a path, a ticket's status through
    whatever tracker access the session has. Anything the session can't check
    (no tracker access, another machine) is reported as unverified.
-4. Report tersely: where the work stands, the next step, open pins. Open pins
-   lead the session; none are dropped silently. A task marked `cleanup pending`
-   is a pin.
+4. Report tersely: where the work stands, the next step, open pins, shaky
+   concepts. Open pins lead the session; none are dropped silently. A task
+   marked `cleanup pending` is a pin.
 
 ## Wrap-up
 
 1. **Review, no writes.** Go through the session with the user: new concepts,
    decisions, findings, deferred items. Agree on what carries forward. A
-   summary handed over for approval does not count as the review.
+   summary handed over for approval does not count as the review. A concept
+   review passed in by another skill (which new concepts feel solid, which
+   shaky) settles the concepts; don't ask again.
 2. **Handoff file.** Add or update detail: step status and results, decisions
    with rationale (what was chosen and why — 3–5 sentences, not code blocks or
-   file lists), findings, sources, confidence. Link the plan with `Plan: <path>`;
+   file lists), findings, sources. Link the plan with `Plan: <path>`;
    implementation patterns, file paths, code snippets, and detailed steps stay
    in the plan. Replace sections rather than appending a session section beside
    them; for sections that record completed work or past decisions, add a date
    to the section header. Create the file if none exists.
 3. **Pointer file.** Overwrite with current state, next step, open pins,
-   unverified claims, and handoff path. No detail copied from the handoff file.
+   unverified claims, shaky concepts (concepts now solid drop off), and
+   handoff path. No detail copied from the handoff file.
 4. **Hook line.** Overwrite the task's `MEMORY.md` line:
    `- [<identifier>](project_task_<identifier>.md) — Active: <one-liner>`
 

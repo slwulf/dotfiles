@@ -33,7 +33,9 @@ alter the index text:
    `<Active|Paused>: <one-liner>` (e.g. a `next:`, `plan:`, or `handoff:`
    field, whether separated by `;` or `—`); a pointer file containing
    content beyond the template fields (State, Next, Pins, Unverified,
-   Handoff) — including old-format prose such as `**Why:**`/`**How to
-   apply:**` blocks or inline summaries that belong in the handoff.
+   Shaky, Handoff) — including old-format prose such as `**Why:**`/`**How to
+   apply:**` blocks or inline summaries that belong in the handoff; a
+   hook line whose one-liner is more than a terse task name; a pointer
+   `description:` that only repeats its hook line.
 
 The skill is read-only. Offer fixes for any findings and wait.
