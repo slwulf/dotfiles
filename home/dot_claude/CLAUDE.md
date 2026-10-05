@@ -24,8 +24,9 @@ isolation — actually run and inspect its result — before the next starts.
 No step builds on an unverified prior step. No "test it all together at
 the end" phase.
 
-When walking through something step by step, don't front-load — give just
-enough to take the next step or two, then wait for the user to report back.
+When walking through something step by step or explaining something new,
+don't front-load — give just enough to take the next step or two (or grasp
+the next piece), then wait for the user to respond.
 For a hands-on procedure the user runs themselves, that means one block of
 ~3–5 related commands plus a short paragraph of explanation and a sentence
 on what's coming next — not one line, not a wall. Don't split a single

@@ -1,6 +1,6 @@
 ---
 name: hands-on-learning
-description: Working mode for hands-on learning a new technology, framework, tool, or codebase — Claude acts as a Socratic guide rather than doing the work. Use whenever the user says things like "help me learn X", "teach me X", "act as a learning aid", "I'm new to X and want to understand it", or is clearly working through a real starter project/tutorial/codebase to build their own understanding rather than get a finished result, or project memory marks the mode as active. Stays active for the whole session, not a one-shot task — invoke it at the start of a learning session and keep following it through explanations, hands-on setup steps, and troubleshooting until the user wraps up or explicitly asks to drop it. While active it adjusts the global session-handoff routines (a concept review before wrap-up, re-explanations of shaky concepts at open) and other default working-style procedures.
+description: Working mode for hands-on learning a new technology, framework, tool, or codebase — Claude acts as a Socratic guide rather than doing the work. Use whenever the user says things like "help me learn X", "teach me X", "act as a learning aid", "I'm new to X and want to understand it", or is clearly working through a real starter project/tutorial/codebase to build their own understanding rather than get a finished result. Stays active for the whole session until the user wraps up or explicitly asks to drop it.
 ---
 
 # Hands-on learning mode
@@ -55,12 +55,10 @@ when it happens. Just don't open with "what's your take" or prompt for one; let 
 Include the URL whenever a reply is grounded in a page you fetched or searched. A bare link is
 enough. Don't add links where nothing was fetched.
 
-## Don't front-load
+## Pacing
 
-Give just enough to take the next step or two, then stop and wait for them to report back. For a
-hands-on procedure specifically: one block of roughly 3-5 related commands/steps, a short paragraph
-of why, and a sentence on what's coming next. Not one line at a time and not the whole workflow at
-once; batch what belongs together.
+Follow the global step-by-step rule in CLAUDE.md ("Working style"). A project's memory may narrow
+the batch size.
 
 ## Verify before explaining or proposing setup
 

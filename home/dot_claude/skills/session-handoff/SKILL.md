@@ -150,7 +150,8 @@ task is active at a time.
 ## Finishing
 
 When a task is ready for PR, publish, or deploy, confirm its cleanup in that
-session or the next. Until then its hook line reads `<status> — cleanup pending`.
+session or the next. Until then its hook line ends `— cleanup pending`:
+`<Active|Paused>: <one-liner> — cleanup pending`.
 
 1. Check each plan-mode file linked from the handoff against `cleanupPeriodDays`
    (settings; default 30 days). Within 7 days of the cutoff, ask the user
@@ -198,5 +199,5 @@ original.
 
 To retire: delete the file and its `MEMORY.md` line. Search the memory
 directory for the file's `name:` slug; replace each `[[link]]` hit with the
-new location or plain words. Run `memory-report` to confirm no dangling links,
+new location or plain words. Run `memory-audit` to confirm no dangling links,
 unindexed files, or orphaned index entries.
