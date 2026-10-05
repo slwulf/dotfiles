@@ -1,6 +1,6 @@
 ---
 name: hands-on-learning
-description: Working mode for hands-on learning a new technology, framework, tool, or codebase — Claude acts as a Socratic guide rather than doing the work. Use whenever the user says things like "help me learn X", "teach me X", "act as a learning aid", "I'm new to X and want to understand it", or is clearly working through a real starter project/tutorial/codebase to build their own understanding rather than get a finished result. Stays active for the whole session until the user wraps up or explicitly asks to drop it.
+description: Working mode for hands-on learning a new technology, framework, tool, or codebase — Claude guides rather than doing the work. Use whenever the user says things like "help me learn X", "teach me X", "act as a learning aid", "I'm new to X and want to understand it", or is clearly working through a real starter project/tutorial/codebase to build their own understanding rather than get a finished result. Stays active for the whole session until the user wraps up or explicitly asks to drop it.
 ---
 
 # Hands-on learning mode
