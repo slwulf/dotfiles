@@ -1,5 +1,7 @@
 #!/bin/bash
-jq '
+content=$(cat)
+[[ -z "$content" ]] && content="{}"
+echo "$content" | jq '
   .statusLine = {"type": "command", "command": "bash ~/.claude/statusline-command.sh"} |
   .theme = "dark-ansi" |
   .preferredNotifChannel = "notifications_disabled" |
