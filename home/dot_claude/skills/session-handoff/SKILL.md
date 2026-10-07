@@ -13,7 +13,7 @@ Three stores, each with a distinct role:
 
 - **`MEMORY.md` hook line** — discovery only. Always in context; one line per
   task, as terse as possible: the task's high-level name, just enough to
-  recognise it by reference. Format: `- [<identifier>](project_task_<identifier>.md) — <Active|Paused>: <one-liner>`
+  recognise it by reference. Format: `- [<identifier>](project_task_<identifier>.md) — <Active|Paused>: <task name>`
 - **Pointer file** (`project_task_<identifier>.md`) — restart context. Owns
   state, next step, open pins, unverified claims, shaky concepts, and path to
   the handoff file.
@@ -129,8 +129,10 @@ Omit `Plan:` if there is no plan.
 3. **Pointer file.** Overwrite with current state, next step, open pins,
    unverified claims, shaky concepts (concepts now solid drop off), and
    handoff path. No detail copied from the handoff file.
-4. **Hook line.** Overwrite the task's `MEMORY.md` line:
-   `- [<identifier>](project_task_<identifier>.md) — Active: <one-liner>`
+4. **Hook line.** Leave it unchanged unless the task's name or its
+   Active/Paused status changed. It names the task and nothing else: no
+   progress, state or next step (those live in the pointer file).
+   `- [<identifier>](project_task_<identifier>.md) — Active: <task name>`
 
 Each write (steps 2–4) needs approval before it lands. If the Edit/Write tool
 will show its own diff prompt (default permission mode), that prompt is the
@@ -151,7 +153,7 @@ task is active at a time.
 
 When a task is ready for PR, publish, or deploy, confirm its cleanup in that
 session or the next. Until then its hook line ends `— cleanup pending`:
-`<Active|Paused>: <one-liner> — cleanup pending`.
+`<Active|Paused>: <task name> — cleanup pending`.
 
 1. Check each plan-mode file linked from the handoff against `cleanupPeriodDays`
    (settings; default 30 days). Within 7 days of the cutoff, ask the user
