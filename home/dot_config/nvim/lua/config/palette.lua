@@ -5,6 +5,7 @@ return {
   light = "#e3e3dd",
   mauve = "#a291a5",
   gray = "#696d77",
+  comment = "#746d7d",
   dark_gray = "#474747",
   border_dim = "#3c3341",
   purple = "#ae81ff",

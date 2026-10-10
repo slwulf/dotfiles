@@ -27,10 +27,11 @@ return {
         return {
           NormalFloat = { bg = scheme.editor.background }, -- unify float body with its border
           Pmenu = { bg = scheme.editor.background },
-          CursorLine = { bg = blend(scheme.base.dimmed2, 0.20, scheme.editor.background) },
+          Comment = { fg = palette.comment },
+          CursorLine = { bg = blend(scheme.base.dimmed2, 0.10, scheme.editor.background) },
           Visual = { bg = blend(scheme.base.dimmed1, 0.40, scheme.editor.background) },
           WinSeparator = { fg = scheme.base.dimmed2 }, -- kitty active_border_color, matches picker border
-          SnacksPickerListCursorLine = { bg = blend(scheme.base.dimmed2, 0.20, scheme.editor.background) },
+          SnacksPickerListCursorLine = { bg = blend(scheme.base.dimmed2, 0.10, scheme.editor.background) },
         }
       end,
     },
