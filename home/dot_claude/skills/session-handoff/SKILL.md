@@ -64,7 +64,7 @@ keeping about it goes in the handoff (Decisions or Findings).
     ---
 
     State: API migration — plan done, no code yet, awaiting security review
-    of token format. Branch main is clean.
+    of token format.
     Next: Implement per plan — add auth middleware to 3 endpoints, update client SDK.
     Pins:
     - Awaiting security team review of JWT claims
@@ -108,9 +108,10 @@ Omit `Plan:` if there is no plan.
    and git status for a branch, files for a path, a ticket's status through
    whatever tracker access the session has. Anything the session can't check
    (no tracker access, another machine) is reported as unverified.
-4. Report tersely: where the work stands, the next step, open pins, shaky
-   concepts. Open pins lead the session; none are dropped silently. A task
-   marked `cleanup pending` is a pin.
+4. Report tersely: where the work stands and the next step. Raise a pin or
+   unverified item only when it bears on the next step; the rest stay in the
+   pointer file. Re-explain shaky concepts. A task marked `cleanup pending`
+   is a pin.
 
 ## Wrap-up
 
@@ -128,7 +129,8 @@ Omit `Plan:` if there is no plan.
    to the section header. Create the file if none exists.
 3. **Pointer file.** Overwrite with current state, next step, open pins,
    unverified claims, shaky concepts (concepts now solid drop off), and
-   handoff path. No detail copied from the handoff file.
+   handoff path. No detail copied from the handoff file, and no git state
+   (branch, tree state, commits); it's derived live at Start.
 4. **Hook line.** Leave it unchanged unless the task's name or its
    Active/Paused status changed. It names the task and nothing else: no
    progress, state or next step (those live in the pointer file).
