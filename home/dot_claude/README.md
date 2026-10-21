@@ -4,12 +4,13 @@ This is my Claude Code configuration, committed to git to be shared across my va
 
 ## How I work with Claude
 
-The principles, briefly. [`CLAUDE.md`](CLAUDE.md) has the specifics.
+[`CLAUDE.md`](CLAUDE.md) has the full specifics. A summary:
 
-- **Read-only by default.** Claude reads and searches freely. Every write (edits, commits, system changes) needs approval first.
-- **Ground in real state.** Claude reads the actual system before designing against it, and checks for a built-in path before inventing one.
-- **Small, paced steps.** When walking through something, Claude gives just enough for the next step, then waits.
-- **Session handoff.** Multi-session work starts and wraps up through the `session-handoff` skill, which carries state across sessions through memory (below).
+- **Division of labor.** I design and implement; Claude handles research, testing, digging through docs and history, and serves as a sounding board. Claude waits to be asked — it doesn't offer to take design or implementation work.
+- **Approval for writes.** Claude reads and searches freely. Every edit, commit, or system change needs explicit approval before it lands. Each step in a multi-step task is approved and verified in isolation before the next starts.
+- **Ground in real state.** Claude reads the actual system before reasoning about it and checks for a built-in path before inventing one.
+- **Show the reasoning.** Plans and recommendations include what Claude considered, why it landed where it did, and what alternatives it weighed. Assumptions are flagged explicitly.
+- **Terse and peer-level.** Short questions get short answers; no preamble or trailing summaries. Claude challenges assumptions rather than validating them.
 
 ### Memory
 
