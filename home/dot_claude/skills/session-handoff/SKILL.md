@@ -9,6 +9,26 @@ description: >-
 
 # Session handoff
 
+This skill uses sub-files for templates and routines. They are not
+auto-loaded — SKILL.md directs Claude to read them on demand via Read.
+
+- `templates/pointer.md` — pointer file format and example; read when creating or updating pointer files
+- `templates/handoff.md` — handoff file format; read when creating or updating handoff files
+- `templates/plan.md` — plan file schema (required/optional sections); read by `routines/new-task.md` when drafting a plan
+- `routines/new-task.md` — new task workflow; read when New task fires or Start finds no pointer with new work
+
+---
+
+## New task
+
+When the user opens a session describing new work — a ticket ID, a task
+description, or both — without an existing handoff to resume, read
+`routines/new-task.md` and follow it.
+
+---
+
+## Data model
+
 Three stores, each with a distinct role:
 
 - **`MEMORY.md` hook line** — discovery only. Always in context; one line per
@@ -18,80 +38,17 @@ Three stores, each with a distinct role:
   state, next step, open pins, unverified claims, shaky concepts, and path to
   the handoff file.
   Read at session start; retired when the task finishes.
+  See `templates/pointer.md` for format, field descriptions, and example.
 - **Handoff file** (`~/.claude/handoffs/<identifier>-handoff.md`) — detail
   record. Decisions + rationale, step results, findings, sources, plan link.
   Open it when work needs depth. Lives outside `~/.claude/plans/`, which
   Claude Code sweeps by age. Becomes a permanent record when the task closes;
   the Digest (see Finishing) is its entry point after the pointer retires.
+  See `templates/handoff.md` for format.
 
 `<identifier>` is the task's ticket, short title, or branch, slugged
 (`feat/x` → `feat-x`). Several tasks can be in flight; one is active. The
 active hook line is first and starts `Active:`; the rest start `Paused:`.
-
-**Pointer file template:**
-
-    ---
-    name: project_task_<identifier>
-    description: <detail that expands the hook line>
-    metadata:
-      type: project
-    ---
-
-    State: <one or two lines>
-    Next: <the next step>
-    Pins:
-    - <open pin>
-    Unverified:
-    - <claim that couldn't be checked against live state>
-    Shaky:
-    - <concept that still feels shaky>
-    Handoff: ~/.claude/handoffs/<identifier>-handoff.md
-
-`name`, `description`, and body are filled per task; `type: project` is fixed —
-it's how the memory system categorizes pointer files. Omit `Unverified:` if
-everything was checked, and `Shaky:` if no concept is shaky.
-
-A listed pin is open. Closing a pin removes it from the list; anything worth
-keeping about it goes in the handoff (Decisions or Findings).
-
-**Example:**
-
-    ---
-    name: project_task_auth-middleware-rewrite
-    description: Rewriting auth middleware to meet compliance requirements
-    metadata:
-      type: project
-    ---
-
-    State: API migration — plan done, no code yet, awaiting security review
-    of token format.
-    Next: Implement per plan — add auth middleware to 3 endpoints, update client SDK.
-    Pins:
-    - Awaiting security team review of JWT claims
-    - Open: defer integration tests until staging env ready, or mock now?
-    Unverified:
-    - Staging env said to be ready "next week" — not checked this session
-    Shaky:
-    - Token refresh flow — re-explain at start
-    Handoff: ~/.claude/handoffs/auth-middleware-rewrite-handoff.md
-
-**Handoff file template:**
-
-    Plan: ~/.claude/plans/<plan-file>.md
-
-    ## Decisions
-    <what was chosen and why — 3–5 sentences per decision, no code>
-
-    ## Steps
-    <step status and results as work progresses>
-
-    ## Findings
-    <discoveries, constraints, gotchas>
-
-    ## Sources
-    <docs, tickets, links consulted>
-
-Omit `Plan:` if there is no plan.
 
 ---
 
@@ -99,8 +56,9 @@ Omit `Plan:` if there is no plan.
 
 1. Read the `Active:` hook line, then its pointer file. The pointer file is
    sufficient to orient — it has state, next step, and open pins. No pointer:
-   ask what the work is, and offer to create the pointer and handoff file at
-   wrap-up. If the user names a different in-flight task, make it active
+   if the user is describing new work, treat this as a new task (read
+   `routines/new-task.md`). Otherwise ask what the work is. If the user names
+   a different in-flight task, make it active
    (see Switching).
 2. Open the handoff file only when the work requires it — for detail on a
    specific decision, a prior finding, or a source.
