@@ -18,7 +18,9 @@ local function apply_recolors()
   recolor("SnacksPickerTitle", { fg = palette.mauve })
   recolor("SnacksTitle", { fg = palette.mauve })
   recolor("FzfLuaTitle", { bg = palette.background, fg = palette.mauve })
-  vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "SnacksPickerDirectory" })
+  vim.api.nvim_set_hl(0, "SnacksPickerDirectory", { fg = palette.purple_muted })
+  vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { fg = palette.gray })
+  vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { fg = palette.gray })
 end
 
 apply_recolors()
