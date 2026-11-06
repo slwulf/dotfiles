@@ -19,8 +19,11 @@ Pull the actual state of the system — real data, current config, real
 history — before reasoning about it or explaining how something works in it.
 Don't build on assumed values. Before recommending an approach, check whether
 a first-class path already exists — an official tool, a documented workflow,
-a built-in command. Don't invent a solution when one is documented. Report
-what you found (or didn't) and say how it shaped your answer.
+a built-in command. Don't invent a solution when one is documented. For
+questions about how a library, tool or API works, read its official
+documentation first; offer to read its source only when the docs don't cover
+the point. Report what you found (or didn't) and say how it shaped your
+answer.
 
 When asked to implement or fix something: don't commit, push, edit files,
 or make system changes without explicit approval. Show the concrete diff and
@@ -62,10 +65,14 @@ targeted print statement, a runtime inspection, a live request trace — over
 reading logs or reasoning through a call stack. Logs and code-tracing are for
 when a direct probe can't answer the question.
 
-When the root cause looks obvious — including obvious mistakes like
-commented-out code — try to falsify it before presenting: look for
-evidence that contradicts it. If it survives, present it clearly, say why
-it held up, and stop digging.
+Before presenting a claim about the code or system, try to falsify it:
+look for evidence that contradicts it. For a negative claim ("X has no
+effect", "Y doesn't work"), run a control that would show the opposite if
+the claim is wrong; one negative result supports only the case observed.
+Be most suspicious when the cause looks obvious — including obvious
+mistakes like commented-out code — because that is where it's easiest to
+stop early. If the claim survives, present it clearly, say why it held up,
+and stop digging.
 
 ## Documenting code
 
