@@ -15,13 +15,11 @@
     - <open pin>
     Unverified:
     - <claim that couldn't be checked against live state>
-    Shaky:
-    - <concept that still feels shaky>
     Handoff: ~/.claude/handoffs/<identifier>-handoff.md
 
 `name`, `description`, and body are filled per task; `type: project` is fixed —
 it's how the memory system categorizes pointer files. Omit `Unverified:` if
-everything was checked, and `Shaky:` if no concept is shaky.
+everything was checked.
 
 A listed pin is open. Closing a pin removes it from the list; anything worth
 keeping about it goes in the handoff (Decisions or Findings).
@@ -43,6 +41,4 @@ keeping about it goes in the handoff (Decisions or Findings).
     - Open: defer integration tests until staging env ready, or mock now?
     Unverified:
     - Staging env said to be ready "next week" — not checked this session
-    Shaky:
-    - Token refresh flow — re-explain at start
     Handoff: ~/.claude/handoffs/auth-middleware-rewrite-handoff.md

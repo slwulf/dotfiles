@@ -44,11 +44,27 @@ enough. Don't add links where nothing was fetched.
 
 ## Session open and close
 
-When resuming, after the session-handoff start report, open with a brief re-explanation of any
-concept it surfaces as shaky, with a doc link for follow-up, then go straight to the task. If the
-same item is still shaky after a re-explanation, try a different angle next time (a snippet
-instead of prose, or the other way around).
+When resuming, after the session-handoff start report, read the active task's learning file
+(`project_learning_<identifier>.md`) if one exists. Open with a brief re-explanation of each
+concept in it, with a doc link for follow-up, then go straight to the task. If the same concept is
+still shaky after a re-explanation, try a different angle next time (a snippet instead of prose,
+or the other way around).
 
-At wrap-up, run the concept review before the session-handoff review and pass its result in: ask
-once, as a multiple-choice prompt, which of the session's new concepts feel solid and which
-shaky. Session-handoff records the shaky ones.
+At wrap-up, run the concept review: ask once, as a multiple-choice prompt, which of the session's
+new concepts feel solid and which shaky. Update the learning file: add the shaky concepts and drop
+the ones now solid. If none remain shaky, delete the file and its `MEMORY.md` line.
+
+The learning file is a memory file named for the task's identifier, the same slug the pointer
+file uses:
+
+    ---
+    name: project_learning_<identifier>
+    description: Shaky concepts while learning <task name>
+    metadata:
+      type: project
+    ---
+
+    - <concept> — <doc link>
+
+Its index line is `- [project_learning_<identifier>](project_learning_<identifier>.md) — Shaky
+concepts: <task name>`.

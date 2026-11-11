@@ -36,8 +36,8 @@ Three stores, each with a distinct role:
   task, as terse as possible: the task's high-level name, just enough to
   recognise it by reference. Format: `- [<identifier>](project_task_<identifier>.md) — <Active|Paused>: <task name>`
 - **Pointer file** (`project_task_<identifier>.md`) — restart context. Owns
-  state, next step, open pins, unverified claims, shaky concepts, and path to
-  the handoff file.
+  state, next step, open pins, unverified claims, and path to the handoff
+  file.
   Read at session start; retired when the task finishes.
   See `templates/pointer.md` for format, field descriptions, and example.
 - **Handoff file** (`~/.claude/handoffs/<identifier>-handoff.md`) — detail
@@ -69,16 +69,13 @@ active hook line is first and starts `Active:`; the rest start `Paused:`.
    (no tracker access, another machine) is reported as unverified.
 4. Report tersely: where the work stands and the next step. Raise a pin or
    unverified item only when it bears on the next step; the rest stay in the
-   pointer file. Re-explain shaky concepts. A task marked `cleanup pending`
-   is a pin.
+   pointer file. A task marked `cleanup pending` is a pin.
 
 ## Wrap-up
 
-1. **Review, no writes.** Go through the session with the user: new concepts,
-   decisions, findings, deferred items. Agree on what carries forward. A
-   summary handed over for approval does not count as the review. A concept
-   review passed in by another skill (which new concepts feel solid, which
-   shaky) settles the concepts; don't ask again.
+1. **Review, no writes.** Go through the session with the user: decisions,
+   findings, deferred items. Agree on what carries forward. A summary handed
+   over for approval does not count as the review.
 2. **Handoff file.** Add or update detail: step status and results, decisions
    with rationale (what was chosen and why — 3–5 sentences, not code blocks or
    file lists), findings, sources. Link the plan with `Plan: <path>`;
@@ -87,21 +84,24 @@ active hook line is first and starts `Active:`; the rest start `Paused:`.
    them; for sections that record completed work or past decisions, add a date
    to the section header. Create the file if none exists.
 3. **Pointer file.** Overwrite with current state, next step, open pins,
-   unverified claims, shaky concepts (concepts now solid drop off), and
-   handoff path. No detail copied from the handoff file, and no git state
-   (branch, tree state, commits); it's derived live at Start.
+   unverified claims, and handoff path. No detail copied from the handoff
+   file.
 4. **Hook line.** Leave it unchanged unless the task's name or its
    Active/Paused status changed. It names the task and nothing else: no
    progress, state or next step (those live in the pointer file).
    `- [<identifier>](project_task_<identifier>.md) — Active: <task name>`
 
-Each write (steps 2–4) needs approval before it lands. If the Edit/Write tool
-will show its own diff prompt (default permission mode), that prompt is the
-approval; don't also paste the diff. If edits are auto-approved, or you can't
-tell, show the diff as plain text in chat and wait for a reply. Deletes and
-moves are writes too: list each path in the approval and run them only after
-it. Ask in plain text, not with `AskUserQuestion` straight after the diff: the
-prompt UI hides it. Don't commit; the user commits.
+Neither the handoff file nor the pointer file records live state: git state
+(branch, tree state, commits) or machine state (services, environment, and the
+like). It changes often, and you can check it when you need it. Record machine
+state only when it is a next step or an open pin, such as setting an
+environment variable a task in flight requires.
+
+Step 1 is the approval. Once the user agrees what carries forward, write steps
+2–4 without a diff approval for each write, then report what changed. Deletes
+and moves still need approval: list each path and run them only after it. Ask
+in plain text, not with `AskUserQuestion` straight after the list: the prompt UI
+hides it. Don't commit; the user commits.
 
 ### Switching
 

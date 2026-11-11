@@ -1,6 +1,6 @@
 ---
 name: doc-review
-description: Three-phase process for taking a doc (runbook, plan, procedure) from idea to ready — propose a skeleton, flesh it out section by section with the user, then run a fresh-eyes verification pass calibrated to the doc's actual reader before calling it done. Use whenever drafting or revising this kind of doc, not just at the end.
+description: Three-phase process for taking a doc (runbook, plan, procedure) from idea to ready — propose a skeleton, flesh it out section by section with the user, then run a fresh-eyes verification pass calibrated to the doc's actual reader before calling it done. Use when drafting a doc or revising prose across its sections, not just at the end. For a small edit (a few sentences within one or two paragraphs of one file), use approve-diff instead.
 ---
 
 # Doc writing and review
