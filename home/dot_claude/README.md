@@ -7,7 +7,7 @@ This is my Claude Code configuration, committed to git to be shared across my va
 [`CLAUDE.md`](CLAUDE.md) has the full specifics. A summary:
 
 - **Division of labor.** I design and implement; Claude handles research, testing, digging through docs and history, and serves as a sounding board. Claude waits to be asked — it doesn't offer to take design or implementation work.
-- **Approval for writes.** Claude reads and searches freely. Every edit, commit, or system change needs explicit approval before it lands. Each step in a multi-step task is approved and verified in isolation before the next starts.
+- **Approval for writes.** Claude reads and searches freely. Every edit, commit, or system change needs explicit approval before it lands, and the `approve-diff` skill shapes each diff.
 - **Ground in real state.** Claude reads the actual system before reasoning about it and checks for a built-in path before inventing one.
 - **Show the reasoning.** Plans and recommendations include what Claude considered, why it landed where it did, and what alternatives it weighed. Assumptions are flagged explicitly.
 - **Terse and peer-level.** Short questions get short answers; no preamble or trailing summaries. Claude challenges assumptions rather than validating them.
@@ -29,4 +29,5 @@ Custom skills live in [`skills/`](skills/).
 - **`session-handoff`**: Start and wrap-up routines for multi-session work. Defines the memory breakdown described above.
 - **`memory-audit`**: Reports on the current project's memory and checks it for inconsistencies. It works alongside `session-handoff`.
 - **`doc-review`**: Takes a doc from skeleton to section-by-section draft to a final verification pass.
-- **`hands-on-learning`**: A working mode for learning a new tool or codebase, where Claude guides and doesn't do the work for you.
+- **`approve-diff`**: Shapes how Claude presents an edit for approval. Code diffs follow the data's flow one step at a time; small markdown and config edits show as one diff.
+- **`hands-on-learning`**: A working mode for learning a new tool or codebase, where Claude guides and doesn't do the work for you. It keeps a per-task file of shaky concepts and re-explains them when you resume.
