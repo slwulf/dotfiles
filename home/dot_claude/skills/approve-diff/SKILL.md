@@ -44,11 +44,19 @@ If the work is drafting or revising prose across sections, use `doc-review`.
 
 ## Config edits
 
-Config is any file that sets how a system behaves, such as a settings file or a
-flag definition. Show a change as one diff, with the filename, the line numbers,
-and the surrounding keys. Group lines only when they form one logical setting.
+Config is a file that a tool reads as declarative settings, so its effect depends
+on what reads it. Examples are settings files, flag definitions, linter configs,
+and build manifests such as `Cargo.toml`, `CMakeLists.txt`, or `package.json`. A
+file's location doesn't decide whether it's config.
 
-Before you present the diff, check what else reads the key or file. Name anything
-the change affects that the user didn't discuss, such as another environment, a
-default that moves, or another consumer of the file. If nothing turns up, say
-nothing.
+Show a config change as one diff, with the filename, the line numbers, and the
+surrounding keys. Group lines only when they form one logical setting. Don't use
+the code template in `templates/diff.md`; a config diff has no data path to
+follow.
+
+Before you present the diff, check what else reads the key or file. Then say only
+what the diff doesn't show, and skip any point that is obvious from it. The
+points to consider are what a new line is needed for, backed by what you
+checked; what else changes, including any state that stays broken until a later
+diff; and where the repo already does the same thing. If no point applies, show
+the diff alone.
