@@ -31,3 +31,4 @@ Custom skills live in [`skills/`](skills/).
 - **`doc-review`**: Takes a doc from skeleton to section-by-section draft to a final verification pass.
 - **`approve-diff`**: Shapes how Claude presents an edit for approval. Code diffs follow the data's flow one step at a time; small markdown and config edits show as one diff.
 - **`hands-on-learning`**: A working mode for learning a new tool or codebase, where Claude guides and doesn't do the work for you. It keeps a per-task file of shaky concepts and re-explains them when you resume.
+- **`stage-commits`**: Splits the working copy into isolated commits and stages them one at a time. Claude only stages; I write each commit.
