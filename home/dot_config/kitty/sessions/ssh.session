@@ -1,4 +1,4 @@
 layout splits
 launch --title ssh kitten ssh __KSSH_HOST__
-launch --location vsplit --title ssh kitten ssh __KSSH_HOST__
-launch --location hsplit --hold --title ssh kitten ssh -t __KSSH_HOST__ btop
+launch --location vsplit --bias 42 --title ssh kitten ssh __KSSH_HOST__
+launch --location hsplit --bias 28 --title ssh kitten ssh __KSSH_HOST__

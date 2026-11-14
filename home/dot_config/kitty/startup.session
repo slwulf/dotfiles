@@ -1,4 +1,4 @@
 layout splits
 launch --cwd=$HOME
-launch --location=vsplit --cwd=$HOME
-launch --location=hsplit btop
+launch --location=vsplit --bias=42 --cwd=$HOME
+launch --location=hsplit --bias=28 --cwd=$HOME
